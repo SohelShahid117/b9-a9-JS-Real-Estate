@@ -20,6 +20,7 @@ import Registration from "./Components/Registration/Registration";
 import AboutUs from "./Components/AboutUs/AboutUs";
 import ContactUs from "./Components/ContactUs/ContactUs";
 import AuthProvider from "./provider/AuthProvider";
+import EstateDetails from "./Components/EstateDetails/EstateDetails";
 
 const router = createBrowserRouter([
   {
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
       {
         path: "/contactUs",
         element: <ContactUs></ContactUs>,
+      },
+      {
+        path: `/estate/:id`,
+        element: <EstateDetails></EstateDetails>,
       },
     ],
   },
