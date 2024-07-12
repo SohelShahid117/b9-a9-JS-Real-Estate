@@ -1,6 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
+import auth from "../../Firebase/firebase.config";
+import { signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
+import { Link } from "react-router-dom";
 
 const Login = () => {
+  const provider = new GoogleAuthProvider();
+  const [user, setUser] = useState(null);
+
+  const handleGoogleLogin = () => {
+    console.log("google mama is coming");
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        // The signed-in user info.
+        const loggedInUser = result.user;
+        // IdP data available using getAdditionalUserInfo(result)
+        // ...
+        console.log(result.user);
+        setUser(loggedInUser);
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        // ...
+        console.log(error);
+      });
+  };
+  const handleLogout = () => {
+    console.log("logout is working");
+    signOut(auth)
+      .then(() => {
+        // Sign-out successful.
+        setUser(null);
+      })
+      .catch((error) => {
+        // An error happened.
+      });
+  };
   return (
     <div className="hero bg-base-200 min-h-screen">
       <div className="hero-content flex-col lg:flex-row-reverse">
@@ -45,6 +88,28 @@ const Login = () => {
               <button className="btn btn-primary">Login</button>
             </div>
           </form>
+          <div>
+            <p>
+              if u have no account?Go to
+              <Link className="btn" to="/registration">
+                Registration
+              </Link>
+            </p>
+          </div>
+          <div className="flex">
+            <p className="mx-5 my-3">Login with</p>
+            <button className="btn btn-secondary" onClick={handleGoogleLogin}>
+              Google
+            </button>
+          </div>
+          {user && (
+            <>
+              <p>{user.email}</p>
+              <button className="btn btn-secondary" onClick={handleLogout}>
+                Logout
+              </button>
+            </>
+          )}
         </div>
       </div>
     </div>

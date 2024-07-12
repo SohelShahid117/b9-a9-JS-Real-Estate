@@ -1,0 +1,101 @@
+[
+    {
+      "id": 1,
+      "img": "https://example.com/image1.jpg",
+      "description": "Description for item 1",
+      "title": "Title 1",
+      "status": "available",
+      "area": "50 sqm",
+      "location": "New York",
+      "segment_name": "Segment A",
+      "price": 1000
+    },
+    {
+      "id": 2,
+      "img": "https://example.com/image2.jpg",
+      "description": "Description for item 2",
+      "title": "Title 2",
+      "status": "sold",
+      "area": "70 sqm",
+      "location": "Los Angeles",
+      "segment_name": "Segment B",
+      "price": 2000
+    },
+    {
+      "id": 3,
+      "img": "https://example.com/image3.jpg",
+      "description": "Description for item 3",
+      "title": "Title 3",
+      "status": "available",
+      "area": "60 sqm",
+      "location": "Chicago",
+      "segment_name": "Segment C",
+      "price": 1500
+    },
+    {
+      "id": 4,
+      "img": "https://example.com/image4.jpg",
+      "description": "Description for item 4",
+      "title": "Title 4",
+      "status": "pending",
+      "area": "80 sqm",
+      "location": "Houston",
+      "segment_name": "Segment D",
+      "price": 1800
+    },
+    {
+      "id": 5,
+      "img": "https://example.com/image5.jpg",
+      "description": "Description for item 5",
+      "title": "Title 5",
+      "status": "available",
+      "area": "90 sqm",
+      "location": "Phoenix",
+      "segment_name": "Segment E",
+      "price": 2500
+    },
+    {
+      "id": 6,
+      "img": "https://example.com/image6.jpg",
+      "description": "Description for item 6",
+      "title": "Title 6",
+      "status": "sold",
+      "area": "40 sqm",
+      "location": "Philadelphia",
+      "segment_name": "Segment F",
+      "price": 1200
+    },
+    {
+      "id": 7,
+      "img": "https://example.com/image7.jpg",
+      "description": "Description for item 7",
+      "title": "Title 7",
+      "status": "pending",
+      "area": "55 sqm",
+      "location": "San Antonio",
+      "segment_name": "Segment G",
+      "price": 1300
+    },
+    {
+      "id": 8,
+      "img": "https://example.com/image8.jpg",
+      "description": "Description for item 8",
+      "title": "Title 8",
+      "status": "available",
+      "area": "85 sqm",
+      "location": "San Diego",
+      "segment_name": "Segment H",
+      "price": 2700
+    },
+    {
+      "id": 9,
+      "img": "https://example.com/image9.jpg",
+      "description": "Description for item 9",
+      "title": "Title 9",
+      "status": "sold",
+      "area": "65 sqm",
+      "location": "Dallas",
+      "segment_name": "Segment I",
+      "price": 2100
+    }
+  ]

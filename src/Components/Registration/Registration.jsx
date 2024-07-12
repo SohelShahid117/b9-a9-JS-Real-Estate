@@ -1,11 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Registration = () => {
   return (
     <div className="hero bg-base-200 min-h-screen">
       <div className="hero-content flex-col lg:flex-row-reverse">
         <div className="text-center lg:text-left">
-          <h1 className="text-5xl font-bold">Login now!</h1>
+          <h1 className="text-5xl font-bold">Registration now!</h1>
           <p className="py-6">
             Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
             excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
@@ -27,6 +28,28 @@ const Registration = () => {
             </div>
             <div className="form-control">
               <label className="label">
+                <span className="label-text">Username</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Username"
+                className="input input-bordered"
+                required
+              />
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Photo</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Photo url"
+                className="input input-bordered"
+                // required
+              />
+            </div>
+            <div className="form-control">
+              <label className="label">
                 <span className="label-text">Password</span>
               </label>
               <input
@@ -42,9 +65,17 @@ const Registration = () => {
               </label>
             </div>
             <div className="form-control mt-6">
-              <button className="btn btn-primary">Login</button>
+              <button className="btn btn-primary">Register</button>
             </div>
           </form>
+          <div>
+            <p className="mx-2">
+              Already have an account?Go to
+              <Link to="/login" className="btn btn-primary ml-2">
+                Login
+              </Link>{" "}
+            </p>
+          </div>
         </div>
       </div>
     </div>
