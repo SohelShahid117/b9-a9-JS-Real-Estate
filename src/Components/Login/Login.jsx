@@ -1,49 +1,64 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import auth from "../../Firebase/firebase.config";
 import { signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
 import { Link } from "react-router-dom";
+import { authContext } from "../../provider/AuthProvider";
 
 const Login = () => {
-  const provider = new GoogleAuthProvider();
-  const [user, setUser] = useState(null);
+  const { signIn, signInWithGoogle } = useContext(authContext);
+  console.log(signIn);
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const form = new FormData(e.currentTarget);
+    console.log(form);
+    const email = form.get("email");
+    const password = form.get("password");
+    console.log(email, password);
+    signIn(email, password)
+      .then((result) => {
+        const loggedInUser = result.user;
+        console.log(loggedInUser);
+        // setUser(loggedInUser);
+      })
+      .catch((err) => console.log(err));
+  };
 
   const handleGoogleLogin = () => {
     console.log("google mama is coming");
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
-        // The signed-in user info.
-        const loggedInUser = result.user;
-        // IdP data available using getAdditionalUserInfo(result)
-        // ...
-        console.log(result.user);
-        setUser(loggedInUser);
-      })
-      .catch((error) => {
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // The email of the user's account used.
-        const email = error.customData.email;
-        // The AuthCredential type that was used.
-        const credential = GoogleAuthProvider.credentialFromError(error);
-        // ...
-        console.log(error);
-      });
+    // signInWithPopup(auth, provider)
+    //   .then((result) => {
+    //     const googleLoggedInUser = result.user;
+    //     console.log(result.user);
+    //     setUser(googleLoggedInUser);
+    //   })
+    //   .catch((error) => {
+    //     // Handle Errors here.
+    //     const errorCode = error.code;
+    //     const errorMessage = error.message;
+    //     // The email of the user's account used.
+    //     const email = error.customData.email;
+    //     // The AuthCredential type that was used.
+    //     const credential = GoogleAuthProvider.credentialFromError(error);
+    //     // ...
+    //     console.log(error);
+    //   });
+
+    signInWithGoogle()
+      .then((result) => console.log(result))
+      .catch((err) => console.log(err));
   };
-  const handleLogout = () => {
-    console.log("logout is working");
-    signOut(auth)
-      .then(() => {
-        // Sign-out successful.
-        setUser(null);
-      })
-      .catch((error) => {
-        // An error happened.
-      });
-  };
+  // const handleLogout = () => {
+  //   console.log("logout is working");
+  //   signOut(auth)
+  //     .then(() => {
+  //       // Sign-out successful.
+  //       setUser(null);
+  //     })
+  //     .catch((error) => {
+  //       // An error happened.
+  //     });
+  // };
   return (
     <div className="hero bg-base-200 min-h-screen">
       <div className="hero-content flex-col lg:flex-row-reverse">
@@ -56,7 +71,7 @@ const Login = () => {
           </p>
         </div>
         <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-          <form className="card-body">
+          <form className="card-body" onSubmit={handleLogin}>
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>
@@ -64,6 +79,7 @@ const Login = () => {
               <input
                 type="email"
                 placeholder="email"
+                name="email"
                 className="input input-bordered"
                 required
               />
@@ -75,6 +91,7 @@ const Login = () => {
               <input
                 type="password"
                 placeholder="password"
+                name="password"
                 className="input input-bordered"
                 required
               />
@@ -102,14 +119,14 @@ const Login = () => {
               Google
             </button>
           </div>
-          {user && (
+          {/* {user && (
             <>
               <p>{user.email}</p>
               <button className="btn btn-secondary" onClick={handleLogout}>
                 Logout
               </button>
             </>
-          )}
+          )} */}
         </div>
       </div>
     </div>

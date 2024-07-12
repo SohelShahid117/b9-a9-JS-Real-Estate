@@ -78,24 +78,24 @@
     },
     {
       "id": 8,
-      "img": "https://example.com/image8.jpg",
-      "description": "Description for item 8",
+      "img": "https://example.com/image7.jpg",
+      "description": "Description for item 7",
       "title": "Title 8",
+      "status": "pending",
+      "area": "55 sqm",
+      "location": "San Antonio",
+      "segment_name": "Segment G",
+      "price": 1300
+    },
+    {
+      "id": 9,
+      "img": "https://example.com/image8.jpg",
+      "description": "Description for item 9",
+      "title": "Title 9",
       "status": "available",
       "area": "85 sqm",
       "location": "San Diego",
       "segment_name": "Segment H",
       "price": 2700
-    },
-    {
-      "id": 9,
-      "img": "https://example.com/image9.jpg",
-      "description": "Description for item 9",
-      "title": "Title 9",
-      "status": "sold",
-      "area": "65 sqm",
-      "location": "Dallas",
-      "segment_name": "Segment I",
-      "price": 2100
-    }
+    }
   ]
