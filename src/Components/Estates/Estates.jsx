@@ -2,20 +2,27 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Estates = ({ estate }) => {
-  const { id } = estate;
+  const { id, img, description, title } = estate;
   console.log(estate);
   return (
     <Link to={`/estate/${id}`}>
       <div className="card bg-base-100 w-96 shadow-xl">
         <figure>
-          <img
-            src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
-            alt="Shoes"
-          />
+          <img src={img} alt="Shoes" />
         </figure>
         <div className="card-body">
-          <h2 className="card-title">Shoes!</h2>
-          <p>If a dog chews shoes whose shoes does he choose?</p>
+          <h2 className="card-title">{title}</h2>
+          {/* <p>{description}</p> */}
+          {description.length > 200 ? (
+            <p>
+              {description.slice(0, 200)}
+              <Link className="text-blue-600 font-bold" to={`/estate/${id}`}>
+                Read More...
+              </Link>
+            </p>
+          ) : (
+            <p>{description}</p>
+          )}
           <div className="card-actions justify-end">
             <button className="btn btn-primary">Buy Now</button>
           </div>
