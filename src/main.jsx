@@ -22,6 +22,7 @@ import ContactUs from "./Components/ContactUs/ContactUs";
 import AuthProvider from "./provider/AuthProvider";
 import EstateDetails from "./Components/EstateDetails/EstateDetails";
 import ErrorPage from "./Components/ErrorPage/ErrorPage";
+import PrivateRoute from "./Components/PrivateRoute/PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -52,7 +53,11 @@ const router = createBrowserRouter([
       },
       {
         path: `/estate/:id`,
-        element: <EstateDetails></EstateDetails>,
+        element: (
+          <PrivateRoute>
+            <EstateDetails></EstateDetails>
+          </PrivateRoute>
+        ),
         loader: () => fetch("/properties.json"),
       },
     ],

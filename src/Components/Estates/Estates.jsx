@@ -18,7 +18,7 @@ const Estates = ({ estate }) => {
   return (
     <Link to={`/estate/${id}`}>
       <div className="card bg-base-100 w-96 shadow-xl">
-        <figure>
+        <figure className="h-40">
           <img src={p_img} alt="properties img" />
         </figure>
         <div className="card-body">

@@ -1,12 +1,20 @@
 import React, { useContext, useState } from "react";
 import auth from "../../Firebase/firebase.config";
 import { signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
-import { Link } from "react-router-dom";
+import {
+  Link,
+  useLoaderData,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import { authContext } from "../../provider/AuthProvider";
 
 const Login = () => {
   const { signIn, signInWithGoogle } = useContext(authContext);
   console.log(signIn);
+  const location = useLocation();
+  console.log("location in the login page", location);
+  const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -19,6 +27,7 @@ const Login = () => {
       .then((result) => {
         const loggedInUser = result.user;
         console.log(loggedInUser);
+        navigate(location?.state ? location.state : "/");
         // setUser(loggedInUser);
       })
       .catch((err) => console.log(err));
