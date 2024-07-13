@@ -10,7 +10,7 @@ const EstateDetails = () => {
   const val = data.find((x) => x.id == id);
   console.log(val);
   const {
-    img,
+    p_img,
     description,
     title,
     status,
@@ -18,15 +18,17 @@ const EstateDetails = () => {
     area,
     segment_name,
     price,
+    facilities,
   } = val;
   return (
     <div>
-      <h2>hello:{id}</h2>
-      <img src={img} alt="" srcset="" />
-      <h1>title:{title}</h1>
+      <h2>{location}</h2>
+      <p>BDT:{price}</p>
+      <img src={p_img} alt="" srcset="" />
+      <h1>{title}</h1>
       <p>{description}</p>
       <p>{status}</p>
-      <p>{location}</p>
+      <p>{facilities}</p>
       <p>{area}</p>
     </div>
   );

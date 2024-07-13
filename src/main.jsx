@@ -21,11 +21,13 @@ import AboutUs from "./Components/AboutUs/AboutUs";
 import ContactUs from "./Components/ContactUs/ContactUs";
 import AuthProvider from "./provider/AuthProvider";
 import EstateDetails from "./Components/EstateDetails/EstateDetails";
+import ErrorPage from "./Components/ErrorPage/ErrorPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root></Root>,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
