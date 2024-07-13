@@ -2,13 +2,23 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Estates = ({ estate }) => {
-  const { id, img, description, title } = estate;
+  const {
+    id,
+    img,
+    description,
+    title,
+    status,
+    area,
+    segment_name,
+    location,
+    price,
+  } = estate;
   console.log(estate);
   return (
     <Link to={`/estate/${id}`}>
       <div className="card bg-base-100 w-96 shadow-xl">
         <figure>
-          <img src={img} alt="Shoes" />
+          <img src={img} alt="properties img" />
         </figure>
         <div className="card-body">
           <h2 className="card-title">{title}</h2>
@@ -24,7 +34,7 @@ const Estates = ({ estate }) => {
             <p>{description}</p>
           )}
           <div className="card-actions justify-end">
-            <button className="btn btn-primary">Buy Now</button>
+            <button className="btn btn-primary">View Details</button>
           </div>
         </div>
       </div>
