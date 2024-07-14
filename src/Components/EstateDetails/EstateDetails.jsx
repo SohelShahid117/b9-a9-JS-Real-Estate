@@ -38,7 +38,10 @@ const EstateDetails = () => {
     <div>
       <div className="m-4">
         <h2 className="text-3xl">{location}</h2>
-        <p className="text-2xl">BDT:{price}</p>
+        <p className="text-2xl">
+          <span className="font-bold">BDT:</span>
+          {price}
+        </p>
       </div>
       <img
         className="w-[90%] h-auto rounded-3xl my-2 p-5 mx-auto"
@@ -49,9 +52,16 @@ const EstateDetails = () => {
       <div className="m-4">
         <h1 className="text-3xl">{title}</h1>
         <p>{description}</p>
-        <p className="font-bold">{status}</p>
-        <p className="text-xl">{facilities}</p>
-        <p className="text-2xl">{area}</p>
+        <p className="text-xl">
+          <span className="font-bold">Status:</span>
+          {status}
+        </p>
+        <p className="text-xl">
+          <span className="font-bold">Facilities:</span> {facilities}
+        </p>
+        <p className="text-2xl">
+          <span className="font-bold">Area:</span> {area}
+        </p>
       </div>
     </div>
   );

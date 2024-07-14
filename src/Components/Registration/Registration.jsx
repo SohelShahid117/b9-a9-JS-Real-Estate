@@ -1,10 +1,15 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { authContext } from "../../provider/AuthProvider";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Registration = () => {
   const { createUser } = useContext(authContext);
   console.log(createUser);
+  const [registerErr, setRegisterErr] = useState("");
+  const [success, setSuccess] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+
   const handleRegister = (e) => {
     e.preventDefault();
     console.log("handleRegister is active");
@@ -13,12 +18,27 @@ const Registration = () => {
     const email = form.get("email");
     const password = form.get("password");
     console.log(email, password);
+    const checked = e.target.terms.checked;
+    console.log(checked);
+    if (password.length < 6) {
+      return setRegisterErr("password should be >=6 character");
+    } else if (!/[A-Z][a-z]/.test(password)) {
+      return setRegisterErr(
+        "at least one uppercase and one lower case character"
+      );
+    } else if (!checked) {
+      return setRegisterErr("accept our terms & conditions");
+    }
+    setRegisterErr("");
+    setSuccess("");
     createUser(email, password)
       .then((result) => {
         console.log(result.user);
+        setSuccess("registration success.");
       })
       .catch((err) => {
         console.log(err);
+        setRegisterErr(err.message);
       });
   };
   return (
@@ -74,18 +94,34 @@ const Registration = () => {
               <label className="label">
                 <span className="label-text">Password</span>
               </label>
-              <input
-                type="password"
-                placeholder="password"
-                name="password"
-                className="input input-bordered"
-                required
-              />
+              <div>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  placeholder="password"
+                  name="password"
+                  className="input input-bordered w-[93%]"
+                  required
+                />
+                <button
+                  onClick={() => {
+                    setShowPassword(!showPassword);
+                  }}
+                  className="w-[5%] -ml-5"
+                >
+                  {/* Show */}
+                  {showPassword ? <FaEye /> : <FaEyeSlash />}
+                </button>
+              </div>
               <label className="label">
                 <a href="#" className="label-text-alt link link-hover">
                   Forgot password?
                 </a>
               </label>
+            </div>
+            <div className="flex">
+              <input type="checkbox" name="terms" id="" />
+              <label htmlFor="terms">Accept our terms & conditions</label>{" "}
+              <br />
             </div>
             <div className="form-control mt-6">
               <button className="btn btn-primary">Register</button>
@@ -99,6 +135,8 @@ const Registration = () => {
               </Link>{" "}
             </p>
           </div>
+          {registerErr && <h2 className="text-red-700">{registerErr}</h2>}
+          {success && <h1 className="text-green-600">{success}</h1>}
         </div>
       </div>
     </div>
