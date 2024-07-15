@@ -1,6 +1,11 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import auth from "../../Firebase/firebase.config";
-import { signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
+import {
+  signInWithPopup,
+  GoogleAuthProvider,
+  signOut,
+  sendPasswordResetEmail,
+} from "firebase/auth";
 import {
   Link,
   useLoaderData,
@@ -15,6 +20,7 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [loggedErr, setLoggedErr] = useState("");
   const [loggedSuccess, setLoggedSuccess] = useState("");
+  const emailRef = useRef(null);
   const { signIn, signInWithGoogle } = useContext(authContext);
   console.log(signIn);
   const location = useLocation();
@@ -46,39 +52,35 @@ const Login = () => {
 
   const handleGoogleLogin = () => {
     console.log("google mama is coming");
-    // signInWithPopup(auth, provider)
-    //   .then((result) => {
-    //     const googleLoggedInUser = result.user;
-    //     console.log(result.user);
-    //     setUser(googleLoggedInUser);
-    //   })
-    //   .catch((error) => {
-    //     // Handle Errors here.
-    //     const errorCode = error.code;
-    //     const errorMessage = error.message;
-    //     // The email of the user's account used.
-    //     const email = error.customData.email;
-    //     // The AuthCredential type that was used.
-    //     const credential = GoogleAuthProvider.credentialFromError(error);
-    //     // ...
-    //     console.log(error);
-    //   });
 
     signInWithGoogle()
       .then((result) => console.log(result))
       .catch((err) => console.log(err));
   };
-  // const handleLogout = () => {
-  //   console.log("logout is working");
-  //   signOut(auth)
-  //     .then(() => {
-  //       // Sign-out successful.
-  //       setUser(null);
-  //     })
-  //     .catch((error) => {
-  //       // An error happened.
-  //     });
-  // };
+
+  const handleForgetPassword = (e) => {
+    // console.log("send Password Reset Email", emailRef);
+    const email = emailRef.current.value;
+    if (!email) {
+      console.log("pls give an Email", emailRef.current.value);
+      return;
+    } else if (!/^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(email)) {
+      //     const gmailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+      // return gmailRegex.test(email);
+      console.log("pls give proper gmail account");
+      return;
+    }
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        console.log("pls check your email");
+        alert("pls check your email");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorMessage);
+      });
+  };
   return (
     <div className="hero bg-base-200 min-h-screen">
       <div className="hero-content flex-col lg:flex-row-reverse">
@@ -100,6 +102,7 @@ const Login = () => {
                 type="email"
                 placeholder="email"
                 name="email"
+                ref={emailRef}
                 className="input input-bordered"
                 required
               />
@@ -127,7 +130,11 @@ const Login = () => {
                 </button>
               </div>
               <label className="label">
-                <a href="#" className="label-text-alt link link-hover">
+                <a
+                  href="#"
+                  className="label-text-alt link link-hover"
+                  onClick={handleForgetPassword}
+                >
                   Forgot password?
                 </a>
               </label>

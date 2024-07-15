@@ -21,13 +21,16 @@ const Estates = ({ estate }) => {
         <figure className="h-40">
           <img src={p_img} alt="properties img" />
         </figure>
-        <div className="card-body">
+        <div className="card-body text-left">
           <h2 className="card-title">{title}</h2>
           {/* <p>{description}</p> */}
-          {description.length > 200 ? (
+          {description.length > 190 ? (
             <p>
-              {description.slice(0, 200)}
-              <Link className="text-blue-600 font-bold" to={`/estate/${id}`}>
+              {description.slice(0, 190)}
+              <Link
+                className="text-blue-600 font-bold ml-2"
+                to={`/estate/${id}`}
+              >
                 Read More...
               </Link>
             </p>

@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { authContext } from "../../provider/AuthProvider";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { sendEmailVerification } from "firebase/auth";
 
 const Registration = () => {
   const { createUser } = useContext(authContext);
@@ -34,7 +35,14 @@ const Registration = () => {
     createUser(email, password)
       .then((result) => {
         console.log(result.user);
-        setSuccess("registration success.");
+        sendEmailVerification(result.user).then(() => {
+          alert("check your verified email");
+        });
+        if (result.user.emailVerified) {
+          setSuccess("registration success.");
+        } else {
+          alert("check your email to verification");
+        }
       })
       .catch((err) => {
         console.log(err);
